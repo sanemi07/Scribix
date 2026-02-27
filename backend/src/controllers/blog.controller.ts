@@ -22,9 +22,9 @@ export const CreateBlog=async(c:Context)=>{
 export const getBlogbyId=async(c:Context)=>{
     try {
          const prisma=getPrisma(c.env.DATABASE_URL)
-        const body=await c.req.json()
+        const id= c.req.param("id")
         const blog=await prisma.post.findFirst({where:{
-            id:body.id
+            id:id
         }})
         return c.json(blog)
         
