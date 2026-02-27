@@ -6,7 +6,13 @@ const router=new Hono()
 router.use('/*',async(c:Context,next)=>{
     try {
         const authHeader= c.req.header('Authorization')||""
-        const res=await verify(authHeader,c.env.JWT_SECRET,'HS256')
+        const token=authHeader.split(' ')[1]
+        
+        console.log(authHeader)
+        const res=await verify(token,c.env.JWT_SECRET,'HS256')
+        if(!res){
+             return c.json({msg:"issue while token vverification"},500)
+        }
        
             c.set("userid",res.id)
              await  next()
@@ -17,11 +23,12 @@ router.use('/*',async(c:Context,next)=>{
        
        
     } catch (error) {
+        console.log(error)
         return c.json({error:error,msg:"issue while token verification"},500)
     }
 })
 router.post('/blog',CreateBlog)
 router.put('/blog',UpdateBlog)
-router.get('/blog:id',getBlogbyId)
+router.get('/blog/:id',getBlogbyId)
 router.get('/blog/bulk',getBlogs)
 export default router

@@ -8,12 +8,13 @@ export const CreateBlog=async(c:Context)=>{
         const blog=await prisma.post.create({data:{
             title:body.title,
             content:body.content,
-            published:body.published,
-            authorId:c.get("userId")
+           
+            authorId:c.get("userid")
 
         }})
         return c.json(blog)
     } catch (error) {
+        console.log(error)
           return c.json({error:error,msg:"issue while creatingblog "},500)
     }
 
