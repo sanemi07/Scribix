@@ -19,11 +19,29 @@ export const signUp=async(c:Context)=>{
                 password:body.password
             }
         })
-        const token=await sign({id:user.id},c.env.JWT_SECRET)
+        const token=await sign({id:user.id},c.env.JWT_SECRET,'HS256')
         return c.json({token})
 
     } catch (error) {
         return c.json(error,500)
     }
 
+}
+export const signIn=async(c:Context)=>{
+     try {
+        const prisma=getPrisma(c.env.DATABASE_URL)
+        const body=await c.req.json()
+        const userexist=await prisma.user.findFirst({where:{
+            email:body.email
+        }})
+        if(!userexist){
+             return c.json({msg:"email not exist"},500)
+        }
+        
+        const token=await sign({id:userexist.id},c.env.JWT_SECRET,'HS256')
+        return c.json({token})
+
+    } catch (error) {
+        return c.json(error,500)
+    }
 }

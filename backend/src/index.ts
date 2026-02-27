@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import userRouter from './routes/user.routes'
+import blogRouter from './routes/blog.routes'
 
 
 
@@ -19,5 +20,6 @@ app.get('/', (c) => {
   return c.text('Hello Hono!')
 })
 app.route('/api/v1',userRouter)
+app.route('/api/v1',blogRouter)
 
 export default app
