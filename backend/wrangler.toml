@@ -5,4 +5,5 @@ compatibility_flags = ["nodejs_compat"]
 
 [vars]
 # These must match your .env values
-DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..IMtNHqsvEXTIKQNI3tg5Iz9PtOU2PRvAWeeLMUDdZ6A"
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19Nd1pVdWYxQW5YeW1Fd2p0N25uckgiLCJhcGlfa2V5IjoiMDFLSkVQQjUwN0tUNDJIWVJTTVZIQlFTUjMiLCJ0ZW5hbnRfaWQiOiJiY2Q2OWI2NDA4M2UwZTIwODc5MGI2MmFlOGE2ZjU3OTdiMTY0ZWYxYzQ0Y2NlM2ZlZDJhNGI4NDhkMmFlMDg4IiwiaW50ZXJuYWxfc2VjcmV0IjoiNzlkODU0NTQtNmFhZC00NTU0LWJhZjUtNzE0M2FkZmFiMzc4In0.Vi6TqhHgBbIi-GHdPqsmhwwROMQnD0TdoYIuCQH2mM8"
+JWT_SECRET='fgueifgeufgewifvbewiufvb'
