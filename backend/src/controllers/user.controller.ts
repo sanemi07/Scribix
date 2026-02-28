@@ -1,11 +1,13 @@
 import { Context } from "hono";
 import { getPrisma } from "../lib/db";
 import { sign } from "hono/jwt";
+import { signUpSchema } from "@sanemi17/medium";
 
 export const signUp=async(c:Context)=>{
     try {
         const prisma=getPrisma(c.env.DATABASE_URL)
         const body=await c.req.json()
+        const success=signUpSchema.safeParse(body)
         const userexist=await prisma.user.findFirst({where:{
             email:body.email
         }})

@@ -1,10 +1,16 @@
 import { Context } from "hono";
 import { getPrisma } from "../lib/db";
+import { CreatePostSchema,UpdatePostSchema } from "@sanemi17/medium";
+
 
 export const CreateBlog=async(c:Context)=>{
     try {
         const prisma=getPrisma(c.env.DATABASE_URL)
         const body=await c.req.json()
+        const success=CreatePostSchema.safeParse(body)
+        if(!success){
+            return c.json({msg:"invalid values "},500)
+        }
         const blog=await prisma.post.create({data:{
             title:body.title,
             content:body.content,
@@ -39,6 +45,10 @@ export const UpdateBlog=async(c:Context)=>{
     try {
         const prisma=getPrisma(c.env.DATABASE_URL)
         const body=await c.req.json()
+         const success=UpdatePostSchema.safeParse(body)
+        if(!success){
+            return c.json({msg:"invalid values "},500)
+        }
         const blog=await prisma.post.update({where:{
             id:body.id
         },data:{
